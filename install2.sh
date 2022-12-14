@@ -49,6 +49,6 @@ echo -e "\033[0;31m'printing instance id,public ip and allowed port"
 
 aws ec2 describe-instances  --filters Name=tag:Name,Values=$instancename   --query 'Reservations[*].Instances[*].{id:InstanceId,publicip:PublicIpAddress,PrivateIpAddress:PrivateIpAddress}'  --output table &&  aws ec2 describe-security-groups     --group-ids $sgid  --query "SecurityGroups[].IpPermissions[].{rule1:FromPort,rule2:ToPort}"   --output table
 
-
+aws ec2 import-key-pair --key-name "id_rsa" --public-key-material fileb://var/lib/jenkins/.ssh/id_rsa.pub
 
 
