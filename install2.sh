@@ -51,21 +51,4 @@ aws ec2 describe-instances  --filters Name=tag:Name,Values=$instancename   --que
 
 
 
-#terminating ec2
-echo "terminating ec2 after 3mins sec"
 
-sleep 3m
-
-echo "terminating ec2"
-
-aws ec2 terminate-instances --instance-ids $(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values=$instancename" --output text) --output text >  /dev/null 2>&1
-
-echo "ec2 terminated"
-
-echo "5mins to delete security group"
-sleep 5m
-
-echo "deleting Security group"
-aws ec2 delete-security-group --group-id $sgid >  /dev/null 2>&1
-
-echo "security group deleted"
