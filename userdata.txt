@@ -4,4 +4,4 @@ sudo apt update -y
 #echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 #systemctl reload apache2
 sudo apt-get install docker.io -y 
-#sudo docker run -itd -p 80:80 nginx
+sudo docker run -itd -p 80:80 nginx
