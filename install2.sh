@@ -45,10 +45,27 @@ aws ec2 run-instances --image-id ami-07ffb2f4d65357b42 --count 1 --instance-type
 
 
 #printing ip,id and port
-#echo -e "\033[0;31m'printing instance id,public ip and allowed port"
+echo -e "\033[0;31m'printing instance id,public ip and allowed port"
 
-#aws ec2 describe-instances  --filters Name=tag:Name,Values=$instancename   --query 'Reservations[*].Instances[*].{id:InstanceId,publicip:PublicIpAddress,PrivateIpAddress:PrivateIpAddress}'  --output table &&  aws ec2 describe-security-groups     --group-ids $sgid  --query "SecurityGroups[].IpPermissions[].{rule1:FromPort,rule2:ToPort}"   --output table
+aws ec2 describe-instances  --filters Name=tag:Name,Values=$instancename   --query 'Reservations[*].Instances[*].{id:InstanceId,publicip:PublicIpAddress,PrivateIpAddress:PrivateIpAddress}'  --output table &&  aws ec2 describe-security-groups     --group-ids $sgid  --query "SecurityGroups[].IpPermissions[].{rule1:FromPort,rule2:ToPort}"   --output table
 
-#aws ec2 import-key-pair --key-name "id_rsa.pub" --public-key-material fileb:///var/lib/jenkins/.ssh/id_rsa.pub
+#terminating ec2
+echo "terminating ec2 after 10 sec"
+
+sleep 10s
+
+echo "terminating ec2"
+
+aws ec2 terminate-instances --instance-ids $(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values=$instancename" --output text) --output text >  /dev/null 2>&1
+
+echo "ec2 terminated
+"
+echo "6mins to delete security group"
+sleep 6m
+
+echo "deleting Security group"
+aws ec2 delete-security-group --group-id $sgid >  /dev/null 2>&1
+
+echo "security group deleted"
 
 
