@@ -37,7 +37,7 @@ echo "security group created"
 echo "creating ec2"
 aws ec2 run-instances --image-id $ami_id  --count 1 --instance-type t3.micro    --key-name alcemy_tech  --security-group-ids $sgid --subnet-id $subnet_id   --user-data file://userdata.txt   --block-device-mappings "[{\"DeviceName\":\"/dev/sdf\",\"Ebs\":{\"VolumeSize\":10,\"DeleteOnTermination\":true}}]"  --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=$instancename}]" --output text >  /dev/null 2>&1
 echo "will take about 1 min to launch"
-sleep 1m
+sleep 1m  #wait to get install all application mention inside userdata
 
 
 
