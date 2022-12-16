@@ -14,7 +14,7 @@ fi
 vpc_id=vpc-e332298b
 subnet_id=subnet-d85f5fb0
 ami_id=ami-07ffb2f4d65357b42
-instancename=cli-test28
+instancename=cli-test29
 sgname=alchemy-sgroupdvpc1
 
 
