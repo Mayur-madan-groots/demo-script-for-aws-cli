@@ -65,19 +65,19 @@ ssh -o StrictHostKeyChecking=no test sudo chown ubuntu /var/www/html/index.html 
 scp -o StrictHostKeyChecking=no /var/lib/jenkins/index.html test:/var/www/html  >  /dev/null 2>&1
 ssh -o StrictHostKeyChecking=no test sudo systemctl restart apache2
 echo "custom page copied"
-
+we can access it using $PIP
 
 #terminating ec2
-echo "terminating ec2 after 3mins sec"
-sleep 3m
-echo "terminating ec2"
-aws ec2 terminate-instances --instance-ids $(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values=$instancename" --output text) --output text >  /dev/null 2>&1
-echo "ec2 terminated"
+#echo "terminating ec2 after 3mins sec"
+#sleep 3m
+#echo "terminating ec2"
+#aws ec2 terminate-instances --instance-ids $(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag:Name,Values=$instancename" --output text) --output text >  /dev/null 2>&1
+#echo "ec2 terminated"
 
 #delete SG
-echo "5mins to delete security group"
-sleep 5m
+#echo "5mins to delete security group"
+#sleep 5m
 
-echo "deleting Security group"
-aws ec2 delete-security-group --group-id $sgid >  /dev/null 2>&1
-echo "security group deleted"
+#echo "deleting Security group"
+#aws ec2 delete-security-group --group-id $sgid >  /dev/null 2>&1
+#echo "security group deleted"
