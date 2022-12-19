@@ -47,8 +47,8 @@ aws ec2 describe-instances  --filters Name=tag:Name,Values=$instancename   --que
 
 
 
-#retriving the public ip of newly created ec2
-PIP=`aws ec2 describe-instances  --query "Reservations[].Instances[].PublicIpAddress" --filters "Name=tag:Name,Values=$instancename" | sed -n 2p | tr -d \"`
+#retriving the private ip of newly created ec2
+PIP=`aws ec2 describe-instances  --query "Reservations[].Instances[].PrivateIpAddress" --filters "Name=tag:Name,Values=$instancename" | sed -n 2p | tr -d \"`
 
 #retriving the old ip from config file
 POIP="$(grep -E -o "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" /var/lib/jenkins/.ssh/config)"
