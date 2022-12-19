@@ -65,7 +65,7 @@ ssh -o StrictHostKeyChecking=no test sudo chown ubuntu /var/www/html/index.html 
 scp -o StrictHostKeyChecking=no /var/lib/jenkins/index.html test:/var/www/html  >  /dev/null 2>&1
 ssh -o StrictHostKeyChecking=no test sudo systemctl restart apache2
 echo "custom page copied"
-we can access it using $PIP
+echo "we can access it using $PIP"
 
 #terminating ec2
 #echo "terminating ec2 after 3mins sec"
